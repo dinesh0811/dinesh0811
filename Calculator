@@ -1,0 +1,69 @@
+class Calculator:
+
+    def __init__(self,x,y):
+
+        self.x=x
+
+        self.y=y
+
+    def add(self):
+
+        self.add = (x+y)
+
+        print(x , "+" , y , "=", self.add)
+
+    def subtract(self):
+
+        self.subtract = (x-y)
+
+        print(x , "-" , y , "=", self.subtract)
+
+    def multiple(self):
+
+        self.multiple = (x*y)
+
+        print(x , "*" , y , "=", self.multiple)
+
+    def devide(self):
+
+        self.devide = (x/y)
+
+        print(x , "/" , y , "=", self.devide)
+
+try:
+
+    print("CALCULATOR")
+
+    print("1.Add\n2.Subtract\n3.Multiple\n4.Devide")
+
+    a = int(input("Select an Operation from 1, 2, 3, 4: "))
+
+    x = int(input("Enter a Number:"))
+
+    y = int(input("Enter a Number:"))
+
+    math = Calculator(x,y)
+
+    if a == 1:
+
+        math.add()
+
+    elif a == 2:
+
+        math.subtract()
+
+    elif a == 3:
+
+        math.multiple()
+
+    elif a == 4:
+
+        math.devide()
+
+    else:
+
+        print("Invalied Input")
+
+except:
+
+    print("Not a valied Number")
