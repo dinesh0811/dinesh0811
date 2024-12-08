@@ -1,0 +1,4 @@
+Authorization key for postman tool:
+
+postman://auth/callback?code=86809dc7aa1bbcc9ce29fe17cf2a3c66a667579161eb298f767d2b48faf45127
+

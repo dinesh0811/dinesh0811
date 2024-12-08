@@ -1,0 +1,44 @@
+URL to test: https://thinking-tester-contact-list.herokuapp.com
+
+Adding New User
+mail id: test.postman@test.com
+passowrd: 1234567
+
+My url : https://thinking-tester-contact-list.herokuapp.com/contactList
+
+JWT-JSON Web Request
+
+We can get this token by login in using POST method with proper url
+User login token : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzU0Njg0ZDFiYWZkYTAwMTMwZTBmMWUiLCJpYXQiOjE3MzM1ODU4Mzl9.Pib6fdrXTPgbTTIf7CUTSFSMnYNdTCkYh4kuH7GUQvA
+
+Note: 
+1. We can also get 404 Error while generating PUT and DELETE request. 
+2. We can also generate a missing required field responseby doing a PUT request to update an existing contacts.
+3. We can user PUT request to updated an existing contact.
+
+1. 200-OK (GET) - (Request successful. The server has responded as required.)
+2. 201-Created (POST) - (A new resource was created successfully.)
+3. 200-OK (PUT) - (Request successful. The server has responded as required.)
+4. 200-OK(DELETE) - (Request successful. The server has responded as required.)
+5. If we try to see deleted contact we will get a 404 found error.
+	404-Not Found (GET) - (Requested resource could not be found)
+
+Entering into Security Test:
+1. A request is send with a missing authentication token 
+Remove the token and send a GET request
+	GET - 401 (Unauthorized) - (The request is unauthenticated.)
+2. A record is not found.
+Enter some invalid ID and send a GET request
+	GET - 404 (Not Found) - (Requested resource could not be found.)
+3. A request is sent with missing required information.
+Remove the first name and send the POST request.
+	POST - 400 (Bad Request) - (The server could not understand the request. Maybe a bad syntax?)
+4. A value is sent with too many characters.
+Add 21 character in last name which only allow 20 characters and send POST request.
+	POST - 400 (Bad Request) - (The server could not understand the request. Maybe a bad syntax?)
+5. A value is send that is not in the correct formate.
+Update a Email to be invalid.
+	PUT - 400 (Bad Request) - (The server could not understand the request. Maybe a bad syntax?)
+
+Setting up an Environment Variable:
+1. set value for firstname and lastname and update the post request firstname and lastname values with {{firstname}} and {{lastname}} and click send.
