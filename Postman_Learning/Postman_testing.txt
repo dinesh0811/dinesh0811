@@ -42,3 +42,28 @@ Update a Email to be invalid.
 
 Setting up an Environment Variable:
 1. set value for firstname and lastname and update the post request firstname and lastname values with {{firstname}} and {{lastname}} and click send.
+
+2. 
+Step -1 - Update a variable using JS.
+Click on Add_Contact, then click 'Scripts', click on 'Set an enviroement variable' and update existing value : pm.environment.set("variable_key", "variable_value");)
+updated value:
+var jsondata = pm.response.json();
+pm.environment.set("contactiD", jsondata._id);
+Then click save and click send to run the test.
+Result: A new user is created in the portal with different contact_id
+
+Step -2 - Do the same for Login
+var jsondata = pm.response.json();
+pm.environment.set("token", jsondata.token);
+Result: Login token has updated as {{contactiD}}
+Here we taking the token for the registered user.
+
+Use {{contactiD}} variable insted the contactid.
+To run Get_Single_Contact and Update_Contact
+
+Use {{token}} variable insted the tokenid.
+To run Get_Contact_List.
+
+3. We can also update each key/value pair for the users.
+
+
