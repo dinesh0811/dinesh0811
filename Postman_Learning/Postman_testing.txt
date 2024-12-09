@@ -66,4 +66,83 @@ To run Get_Contact_List.
 
 3. We can also update each key/value pair for the users.
 
+Status type Assertions:
+It's validated that the status code we receive as a response to a request is the one we are expecting.
+
+1. Select Get_Contact_List and click on 'Scripts', to verify the status code assertion select 'Status code: Code is 200' option
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+click 'Send' button
+Result: Test Result passed and we got 200 OK response
+
+2. To test negative request
+Follow the same steps'Get_Contact_List-Unauthorized' and click 'Send'
+i. 
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+Result: Test Failed - Status code is 200 | AssertionError: expected response to have status code 200 but got 404
+
+ii. 
+pm.test("Status code is 404", function () {
+    pm.response.to.have.status(404);
+});
+Result: Test passed - Status code is 404
+
+Body type Assertions:
+A body assertions verifies that the body of the response contains the text we are were expecting
+
+1. Select 'Get_Single_Contact', click 'Scripts' and select 'Response Body: Contains string' 
+i. 
+pm.test("Body matches string", function () {
+    pm.expect(pm.response.text()).to.include("fackuser3@gmail.com");
+});
+Result: Test Passed - Body matches string
+
+ii.
+pm.test("Missing Firstname Error message is returned", function () {
+    pm.expect(pm.response.text()).to.include("`firstName` is required");
+});
+Result: Test Passed - Missing Firstname Error message is returned
+
+"Response body: Contains string": The text is in the body of the responmse, but may not be the entire response
+
+Note: If we want entire response select "Response body: is equal to a string": The text matches the entire body of the response
+
+Header and Response time assertions: (Security and Performance testing)
+Header:
+	Response Headers: Information passed with an API response that include additional information about the response, such as the format fof the response or any security controls
+i. Select 'Response Headers: Content-Type header check' and click 'Send'
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+pm.test("Content-Type is application/json", function () {
+    pm.response.to.have.header("Content-type", "application/json; charset=utf-8");
+});
+Result: Test passed (2/2) - Status code is 200, Content-Type is application/json
+
+Response time:
+The time is takes for a request to reach the server and return a response.
+Click on the 3 dots of 'Contact List' Collections and navigate to 'scripts' 
+Note: It'll will add for all available methods in the collections.
+pm.test("Response time is less than 3000ms", function () {
+    pm.expect(pm.response.responseTime).to.be.below(3000);
+});
+i. Select 'Add_Contact' and click send.
+Result: Test passed - Response time is less than 3000ms
+
+ii. Select 'Add_Contact-Missing_Required_Field' and click send
+Result: Test passed - Response time is less than 3000ms,  Missing Firstname Error message is returned
+
+Note: we can add all type of assertions to collection level and also folder level.
+
+Debug:
+Debug your tes when your test is failing.
+1. Check that your HTTP verb is correct
+2. Check that the authentication token is sent
+3. Check that the URL of the request is correct
+4. Check that the all variables are populated correctly in the request
+Note: Click on 'Console' button to address the issue.
+
 
