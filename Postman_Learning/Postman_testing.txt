@@ -146,3 +146,81 @@ Debug your tes when your test is failing.
 Note: Click on 'Console' button to address the issue.
 
 
+JSON assertions:
+Body vs JSON assertions:
+--Body assertions is just looking for the value somewhere in the body.
+--JSON assertions is looking for a specific field value and validating that, what's you're expecting.
+
+Add new Snippets "Response Body:JSON value check"
+with help of above Snippet we can find the value
+
+1. To find firstname and lastname values using ablove snippet.
+var jsonData = pm.response.json();
+pm.test("Correct first name is returned", function () {
+    pm.expect(jsonData.firstname).to.eql(environment.firstname);
+});
+pm.test("Correct last name is returned", function () {
+    pm.expect(jsonData.lastname).to.eql(environment.lastname);
+});
+
+Result: Test is passed because we received exact first and last names
+
+Nested JSON assertion:
+
+Example for nested value is address:
+"address": {
+        "street": "123 Main St.", "city": "Belmont", "state": "MA", "postalCode": "01734"
+    }
+
+1. Here I added a file from Github using " https://github.com/LinkedInLearning/postman-essential-training-4362153/blob/main/Address.postman_collection.txt "
+then added into my folder as a JSON format file.
+Now I added the same snippet
+var jsonData = pm.response.json();
+pm.test("Correct city is returned", function () {
+    pm.expect(jsonData.address.city).to.eql("Belmont");
+});
+pm.test("Correct city is returned", function () {
+    pm.expect(jsonData.address.postalCode).to.eql("01734");
+});
+Result: Test is passed because we received exact city name
+Note: Remember whenever we using nested json we need to give the value from out side level in. eg:To get city name use "address.city" and for postalCode use "address.postalCode"
+
+2. Now I have added one more file to validate more complicated nested value "D:\Postman_Learnings\postman-essential-training-4362153PetOwners.postman_collection.json"
+pm.test("Amy's 2nd cat is a Siamese", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.pets.cats[1].breed).to.eql("Siamese");
+});
+
+Result: Test passed
+
+3. Again tested one complicated suit.
+pm.test("Carol's 2nd dog name is Fred", function () {
+    var jsonData = pm.response.json();
+    pm.expect(jsonData.owners[2].pets.dogs[1].name).to.eql("Fred");
+});
+
+Result: Test passed
+
+4. Task: Add an assertion to to get the per owners request that will assert the Bob's first cat is two years old
+
+var jsonData = pm.response.json();
+pm.test("Carol's 2nd dog name is Fred", function () {
+    pm.expect(jsonData.owners[2].pets.dogs[1].name).to.eql("Fred");
+});
+pm.test("Bob's first cat is two years old", function () {
+    pm.expect(jsonData.owners[1].pets.cats[0].age).to.eql(2);
+});
+
+Result: Test passed
+
+
+The Postman Collections Runner:
+Collections Runner: A future of postman that will send a each request for your collection automatically
+
+1. We can run the collection using run 
+2. Export all data from Contact_list and it's environment file.
+
+
+
+
+location: https://github.com/LinkedInLearning/postman-essential-training-4362153/tree/main
